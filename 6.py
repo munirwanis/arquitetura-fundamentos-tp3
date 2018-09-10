@@ -22,7 +22,7 @@ colors = [red, green, yellow, blue, white, pink]
 
 screen = pygame.display.set_mode(size)
 
-for i in range(0, 50):
+for i in range(0, 10):
     x = random.randint(0,750)
     y = random.randint(0,550)
     random_color = colors[random.randint(0, len(colors)-1)]
