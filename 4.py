@@ -14,6 +14,8 @@ i) A cada 3 segundos (ou um valor aproximado), troque as cores do círculo e do 
 '''
 
 import sys, pygame
+import random
+
 pygame.init()
 
 size = width, height = 800, 600
@@ -27,9 +29,12 @@ white = (255,255,255)
 black = (0,0,0)
 pink = (255,200,200)
 
+colors = [red, green, yellow, blue, white, pink]
+
 screen = pygame.display.set_mode(size)
-square = pygame.draw.rect(screen, red, [100, 10, 100, 100])
-circle = pygame.draw.circle(screen, blue, [400, 300], 50)
+
+square_color = red
+circle_color = blue
 
 default_font = pygame.font.get_default_font()
 font = pygame.font.Font(default_font, 20)
@@ -37,19 +42,23 @@ square_text = font.render("Quadrado", True, yellow)
 screen.blit(square_text, [100, 115])
 
 circle_text = font.render("Círculo", True, white)
-screen.blit(circle_text, [365, 293])
-# ballrect = ball.get_rect()
+
+clock = pygame.time.Clock()
+
+CHANGE_COLOR_EVENT, t = pygame.USEREVENT+1, 3000
+pygame.time.set_timer(CHANGE_COLOR_EVENT, t)
 
 while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
+        elif event.type == CHANGE_COLOR_EVENT:
+            square_color = colors[random.randint(0, len(colors)-1)]
+            circle_color = colors[random.randint(0, len(colors)-1)]
 
-    # ballrect = ball.move(speed)
-    # if ballrect.left < 0 or ballrect.right > width:
-    #     speed[0] = -speed[0]
-    # if ballrect.top < 0 or ballrect.bottom > height:
-    #     speed[1] = -speed[1]
+    clock.tick(60)
 
-    # screen.fill(black)
-    # screen.blit(ball, ballrect)
-    pygame.display.flip()
+    pygame.draw.rect(screen, square_color, [100, 10, 100, 100])
+    pygame.draw.circle(screen, circle_color, [400, 300], 50)
+    screen.blit(circle_text, [365, 293])
+
+    pygame.display.update()
