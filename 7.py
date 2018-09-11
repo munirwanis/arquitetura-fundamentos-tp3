@@ -1,4 +1,4 @@
-# #-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 '''
 7) Usando a biblioteca Pygame, escreva um programa que desenha 1 quadrado de tamanho 50 e cor vermelha na tela. Quando for clicado, ele deve ser apagado da tela (C).
 '''
